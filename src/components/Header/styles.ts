@@ -10,7 +10,7 @@ export const HeaderContainer = styled.header`
   background-size: cover;
   background-position: center;
 
-  > img {
+  img {
     margin-top: 4rem;
     width: 9.25rem;
   }

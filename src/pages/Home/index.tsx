@@ -8,46 +8,54 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { Card } from './components/Card'
+import { NavLink } from 'react-router-dom'
+import { useContext } from 'react'
+import { GlobalContext } from '../../contexts/GlobalContext'
 
 export function Home() {
+  const { postsData, userData } = useContext(GlobalContext)
   return (
     <HomeMain>
       <Profile>
-        <img src="https://github.com/andreserafin.png" width="80" alt="" />
+        <img src={userData.avatar_url} width="80" alt="" />
         <div>
           <div>
-            <h1>André Pereira</h1>
-            <a href="https://github.com/andreserafin">
+            <h1>{userData.name}</h1>
+            <NavLink to={userData.html_url}>
               GITHUB
               <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
-            </a>
+            </NavLink>
           </div>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus,
-            non? Cupiditate esse quasi dolorum? Maiores soluta.
-          </p>
+          <p>{userData.bio}</p>
           <div>
             <div>
               <FontAwesomeIcon icon={faGithub} />
-              <span>andreserafin</span>
+              <span>{userData.login}</span>
             </div>
             <div>
               <FontAwesomeIcon icon={faBuilding} />
-              <span>Rocketseat</span>
+              <span>{userData.company}</span>
             </div>
             <div>
               <FontAwesomeIcon icon={faUserGroup} />
-              <span>32 seguidores</span>
+              <span>{userData.followers}</span>
             </div>
           </div>
         </div>
       </Profile>
       <SearchForm />
       <CardsSection>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        {postsData.map((postData) => {
+          return (
+            <Card
+              key={postData.createdAt}
+              body={postData.body}
+              createdAt={postData.createdAt}
+              title={postData.title}
+              numberOfComments={postData.numberOfComments}
+            />
+          )
+        })}
       </CardsSection>
     </HomeMain>
   )

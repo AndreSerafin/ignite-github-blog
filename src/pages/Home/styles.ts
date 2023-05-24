@@ -54,6 +54,10 @@ export const Profile = styled.div`
         display: flex;
         align-items: center;
         gap: 0.5rem;
+
+        svg {
+          color: ${(props) => props.theme['base-span']};
+        }
       }
     }
   }

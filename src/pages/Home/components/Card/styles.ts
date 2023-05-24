@@ -1,6 +1,7 @@
+import { NavLink } from 'react-router-dom'
 import { styled } from 'styled-components'
 
-export const CardContainer = styled.section`
+export const CardContainer = styled(NavLink)`
   padding: 2rem;
   background: ${(props) => props.theme['base-post']};
   border-radius: 10px;
@@ -9,27 +10,31 @@ export const CardContainer = styled.section`
   flex-direction: column;
   gap: 1.25rem;
   overflow: hidden;
-  transition: outline 0.2s;
+  text-decoration: none;
+  height: 16.25rem;
+  color: ${(props) => props.theme['base-text']};
   &:hover {
-    outline: 2px solid ${(props) => props.theme['base-label']};
+    transition: 0.5s box-shadow;
+    box-shadow: 0 0 0 2px ${(props) => props.theme['base-label']};
     cursor: pointer;
   }
   p {
     display: -webkit-box;
-    -webkit-line-clamp: 4; /** número de linhas que você quer exibir */
+    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
   }
   > div {
     display: flex;
-    gap: 1rem;
+    justify-content: space-between;
     h3 {
+      color: ${(props) => props.theme['base-title']};
       font-size: 1.25rem;
+      max-width: 320px;
     }
     > span {
       font-size: 0.875rem;
-      width: 80px;
     }
   }
 `
