@@ -11,17 +11,17 @@ interface UserData {
   login: string
 }
 
-export interface Post {
+export interface PostType {
   title: string
   body: string
-  createdAt: string
+  createdAt: Date
   numberOfComments: number
   id: number
 }
 
 interface GlobalContextType {
   userData: UserData
-  postsData: Post[]
+  postsData: PostType[]
   fetchUserData: () => void
   fetchPostsData: () => void
 }
@@ -41,12 +41,12 @@ export function GlobalProvider({ children }: GlobalProviderProps) {
     login: '',
   })
 
-  const [postsData, setPostsData] = useState<Post[]>([
+  const [postsData, setPostsData] = useState<PostType[]>([
     {
       title: '',
       body: '',
       numberOfComments: 0,
-      createdAt: '',
+      createdAt: new Date(),
       id: 0,
     },
   ])

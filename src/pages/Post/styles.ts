@@ -44,6 +44,10 @@ export const PostInfo = styled.div`
       color: ${(props) => props.theme['base-span']};
       display: flex;
       gap: 0.5rem;
+      align-items: center;
     }
   }
+`
+
+export const PostBody = styled.div`
 `

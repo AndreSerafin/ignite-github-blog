@@ -47,8 +47,9 @@ export function Home() {
       <CardsSection>
         {postsData.map((postData) => {
           return (
-            <Card
-              key={postData.createdAt}
+            <Card 
+              key={postData.id}
+              id={postData.id}
               body={postData.body}
               createdAt={postData.createdAt}
               title={postData.title}

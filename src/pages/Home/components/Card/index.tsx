@@ -1,18 +1,15 @@
 import { formatDistanceToNow } from 'date-fns'
-import { Post } from '../../../../contexts/GlobalContext'
+import { PostType } from '../../../../contexts/GlobalContext'
 import { CardContainer } from './styles'
 import { ptBR } from 'date-fns/locale'
 
-export function Card({ title, body, createdAt }: Post) {
-  const publishedDateRelativeToNow =
-    createdAt !== ''
-      ? formatDistanceToNow(new Date(createdAt), {
-          locale: ptBR,
-          addSuffix: true,
-        })
-      : ''
+export function Card({ title, body, createdAt, id }: PostType) {
+  const publishedDateRelativeToNow = formatDistanceToNow(new Date(createdAt), {
+    locale: ptBR,
+    addSuffix: true,
+  })
   return (
-    <CardContainer to={'post'}>
+    <CardContainer to={`post/${id}`}>
       <div>
         <h3>{title}</h3>
         <time></time>
