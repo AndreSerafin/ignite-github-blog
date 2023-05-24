@@ -64,6 +64,8 @@ export const Profile = styled.div`
 `
 export const CardsSection = styled.section`
   margin-top: 3rem;
+  margin-bottom: 14.625rem;
+
   width: 100%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);

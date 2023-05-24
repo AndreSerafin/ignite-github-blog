@@ -46,6 +46,8 @@ export function Home() {
       <CardsSection>
         <Card />
         <Card />
+        <Card />
+        <Card />
       </CardsSection>
     </HomeMain>
   )
