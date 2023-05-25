@@ -1,4 +1,5 @@
 import { styled } from 'styled-components'
+import { ReactMarkdown } from 'react-markdown/lib/react-markdown'
 
 export const PostContainer = styled.main`
   width: 960px;
@@ -49,5 +50,27 @@ export const PostInfo = styled.div`
   }
 `
 
-export const PostBody = styled.div`
+export const PostBody = styled(ReactMarkdown)`
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    color: ${(props) => props.theme['brand-blue']};
+    text-decoration: underline 2px;
+  }
+
+  pre {
+    padding: 1rem;
+    background: ${(props) => props.theme['base-post']};
+
+    div {
+      background-color: transparent !important;
+    }
+  }
 `

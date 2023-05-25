@@ -12,6 +12,8 @@ import { useContext, useEffect, useState } from 'react'
 import { GlobalContext, PostType } from '../../contexts/GlobalContext'
 import { formatDistanceToNow } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
 export function Post() {
   const [post, setPost] = useState<PostType>({
@@ -75,8 +77,28 @@ export function Post() {
           </div>
         </div>
       </PostInfo>
-      <PostBody>
-        <p>{post.body}</p>
+      <PostBody
+        components={{
+          code({ node, inline, className, children, ...props }) {
+            const match = /language-(\w+)/.exec(className || '')
+            return !inline && match ? (
+              <SyntaxHighlighter
+                {...props}
+                style={atomDark}
+                language={match[1]}
+                PreTag="div"
+              >
+                {String(children).replace(/\n$/, '')}
+              </SyntaxHighlighter>
+            ) : (
+              <code {...props} className={className}>
+                {children}
+              </code>
+            )
+          },
+        }}
+      >
+        {post.body}
       </PostBody>
     </PostContainer>
   )
