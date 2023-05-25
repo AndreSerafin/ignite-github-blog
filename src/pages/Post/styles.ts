@@ -68,9 +68,14 @@ export const PostBody = styled(ReactMarkdown)`
   pre {
     padding: 1rem;
     background: ${(props) => props.theme['base-post']};
+    border-radius: 6px;
 
     div {
       background-color: transparent !important;
+    }
+
+    code {
+      background: transparent !important;
     }
   }
 `

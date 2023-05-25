@@ -46,16 +46,7 @@ export function Home() {
       <SearchForm />
       <CardsSection>
         {postsData.map((postData) => {
-          return (
-            <Card
-              key={postData.id}
-              id={postData.id}
-              body={postData.body}
-              createdAt={postData.createdAt}
-              title={postData.title}
-              numberOfComments={postData.numberOfComments}
-            />
-          )
+          return <Card key={postData.id} post={postData} />
         })}
       </CardsSection>
     </HomeMain>

@@ -13,7 +13,7 @@ import { GlobalContext, PostType } from '../../contexts/GlobalContext'
 import { formatDistanceToNow } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
 export function Post() {
   const [post, setPost] = useState<PostType>({
@@ -84,7 +84,7 @@ export function Post() {
             return !inline && match ? (
               <SyntaxHighlighter
                 {...props}
-                style={atomDark}
+                style={oneDark}
                 language={match[1]}
                 PreTag="div"
               >

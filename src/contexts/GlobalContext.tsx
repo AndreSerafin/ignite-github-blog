@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useEffect, useState } from 'react'
-import { issuesApi, userApi } from '../services/api'
+import { api } from '../services/api'
 
 interface UserData {
   name: string
@@ -52,15 +52,15 @@ export function GlobalProvider({ children }: GlobalProviderProps) {
   ])
 
   async function fetchUserData() {
-    const response = await userApi.get('andreserafin')
+    const response = await api.get('users/andreserafin')
     const { name, bio, company, followers, html_url, avatar_url, login } =
       response.data
     setUserData({ name, bio, company, followers, html_url, avatar_url, login })
   }
 
   async function fetchPostsData() {
-    const response = await issuesApi.get(
-      'AndreSerafin/ignite-github-blog/issues',
+    const response = await api.get(
+      'repos/AndreSerafin/ignite-github-blog/issues',
     )
     const posts = response.data.map((post: any) => ({
       title: post.title,
