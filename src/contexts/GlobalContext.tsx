@@ -11,6 +11,14 @@ interface UserData {
   login: string
 }
 
+interface PostRequisition {
+  title: string
+  body: string
+  created_at: Date
+  comments: number
+  id: number
+}
+
 export interface PostType {
   title: string
   body: string
@@ -24,6 +32,7 @@ interface GlobalContextType {
   postsData: PostType[]
   fetchUserData: () => void
   fetchPostsData: () => void
+  fetchSearchPostsData: (query?: string) => void
 }
 
 interface GlobalProviderProps {
@@ -62,7 +71,8 @@ export function GlobalProvider({ children }: GlobalProviderProps) {
     const response = await api.get(
       'repos/AndreSerafin/ignite-github-blog/issues',
     )
-    const posts = response.data.map((post: any) => ({
+
+    const posts = response.data.map((post: PostRequisition) => ({
       title: post.title,
       body: post.body,
       createdAt: post.created_at,
@@ -70,8 +80,26 @@ export function GlobalProvider({ children }: GlobalProviderProps) {
       id: post.id,
     }))
     setPostsData(posts)
-    console.log(posts)
   }
+
+  async function fetchSearchPostsData(query?: string) {
+    const userName = 'AndreSerafin'
+    const repo = 'ignite-github-blog'
+    const response = await api.get(
+      `search/issues?q=${query}%20repo:${userName}/${repo}`,
+    )
+    const { items } = response.data
+
+    const posts = items.map((post: PostRequisition) => ({
+      title: post.title,
+      body: post.body,
+      createdAt: post.created_at,
+      numberOfComments: post.comments,
+      id: post.id,
+    }))
+    setPostsData(posts)
+  }
+
   useEffect(() => {
     fetchUserData()
     fetchPostsData()
@@ -79,7 +107,13 @@ export function GlobalProvider({ children }: GlobalProviderProps) {
 
   return (
     <GlobalContext.Provider
-      value={{ userData, postsData, fetchUserData, fetchPostsData }}
+      value={{
+        userData,
+        postsData,
+        fetchUserData,
+        fetchPostsData,
+        fetchSearchPostsData,
+      }}
     >
       {children}
     </GlobalContext.Provider>
